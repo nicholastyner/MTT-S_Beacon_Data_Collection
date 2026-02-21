@@ -1,12 +1,25 @@
-import requests
+import haversine_formula
+import midpoints
+import sunrise_sunset
+
+# A&M
+latitude_tx = 30.6187
+longitude_tx = -96.3364
+
+# UT Dallas
+latitude_rx = 32.9859
+longitude_rx = -96.7503
+
+# number of midpoints
+count_midpoints = 3
+
+# calculating the distance between the points Haversine formula
+distance = haversine_formula.calculate_distance(latitude_tx, longitude_tx, latitude_rx, longitude_rx)
+
+# midpoints
+midpoints = midpoints.midpoints(latitude_tx, longitude_tx, latitude_rx, longitude_rx, count_midpoints)
 
 # sunrise sunset API
-latitude = 136.204823
-longitude = 138.252930
+sunrise, sunset = sunrise_sunset.sunrise_sunset(latitude_tx, longitude_tx)
 
-sunrise_sunset_input = {
-    "lat" : latitude,
-    "lng" : longitude,
-}
-sunrise_sunset_response = requests.get(url = "https://api.sunrise-sunset.org/json", params=sunrise_sunset_input)
-print(sunrise_sunset_response.json())
+print(sunrise, sunset)
