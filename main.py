@@ -17,7 +17,9 @@ count_midpoints = 3
 distance = haversine_formula.calculate_distance(latitude_tx, longitude_tx, latitude_rx, longitude_rx)
 
 # midpoints
-midpoints = midpoints.midpoints(latitude_tx, longitude_tx, latitude_rx, longitude_rx, count_midpoints)
+midpoints = midpoints.midpoints(latitude_tx, longitude_tx, latitude_rx, longitude_rx, distance, count_midpoints)
+print(midpoints)
+
 
 # sunrise sunset API
 sunrise, sunset = sunrise_sunset.sunrise_sunset(latitude_tx, longitude_tx)
