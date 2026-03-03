@@ -1,7 +1,7 @@
 import math
 import numpy as np
 
-def midpoints(lat_tx, lon_tx, lat_rx, lon_rx, distance, num):
+def midpoints_proper(lat_tx, lon_tx, lat_rx, lon_rx, distance, num):
     
     midpoints = []
     
@@ -26,5 +26,17 @@ def midpoints(lat_tx, lon_tx, lat_rx, lon_rx, distance, num):
         lat = math.degrees(math.atan2(z, math.sqrt(x**2 + y**2)))
         lon = math.degrees(math.atan2(y, x))
         midpoints.append([lat, lon])
+    
+    return midpoints
+
+def midpoints(lat_tx, lon_tx, lat_rx, lon_rx, distance, num):
+    
+    midpoints = []
+    
+    lats = np.linspace(lat_tx, lat_rx, num)
+    lons = np.linspace(lon_tx, lon_rx, num)
+    
+    for i in range(len(lats)):
+        midpoints.append([float(lats[i]), float(lons[i])])
     
     return midpoints
