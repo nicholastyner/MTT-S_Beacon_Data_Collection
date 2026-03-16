@@ -1,6 +1,7 @@
 import haversine_formula
 import midpoints
 import sunrise_sunset
+import weather
 
 # A&M
 latitude_tx = 30.6187
@@ -25,3 +26,6 @@ print(midpoints)
 sunrise, sunset = sunrise_sunset.sunrise_sunset(latitude_tx, longitude_tx)
 
 print(sunrise, sunset)
+
+# Weather
+weather.weather(30.6210, -96.3255)
