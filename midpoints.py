@@ -29,7 +29,7 @@ def midpoints_proper(lat_tx, lon_tx, lat_rx, lon_rx, distance, num):
     
     return midpoints
 
-def midpoints(lat_tx, lon_tx, lat_rx, lon_rx, distance, num):
+def calculate_midpoints(lat_tx, lon_tx, lat_rx, lon_rx, distance, num):
     
     midpoints = []
     

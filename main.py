@@ -2,6 +2,7 @@ import haversine_formula
 import midpoints
 import sunrise_sunset
 import weather
+import write_to_csv
 
 # A&M
 latitude_tx = 30.6187
@@ -18,7 +19,7 @@ count_midpoints = 3
 distance = haversine_formula.calculate_distance(latitude_tx, longitude_tx, latitude_rx, longitude_rx)
 
 # midpoints
-midpoints = midpoints.midpoints(latitude_tx, longitude_tx, latitude_rx, longitude_rx, distance, count_midpoints)
+midpoints = midpoints.calculate_midpoints(latitude_tx, longitude_tx, latitude_rx, longitude_rx, distance, count_midpoints)
 print(midpoints)
 
 
@@ -28,4 +29,7 @@ sunrise, sunset = sunrise_sunset.sunrise_sunset(latitude_tx, longitude_tx)
 print(sunrise, sunset)
 
 # Weather
-weather.weather(30.6210, -96.3255)
+weather_dict = weather.weather(30.6210, -96.3255)
+
+write_to_csv.csv_headers(weather_dict)
+write_to_csv.to_csv(weather_dict)
