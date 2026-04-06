@@ -1,5 +1,11 @@
 import requests
 import json
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+IPGEOLOCATION_API_KEY = os.getenv("IPGEOLOCATION_API_KEY")
 
 def sunrise_sunset(lat, lon):
     # TODO
@@ -19,3 +25,16 @@ def sunrise_sunset(lat, lon):
     sunset = sunrise_sunset_dict["sunset"]
     
     return sunrise, sunset
+
+def elevation(lat, lon):
+    url = f"https://api.ipgeolocation.io/v3/astronomy?apiKey={IPGEOLOCATION_API_KEY}&lat={lat}&long={lon}"
+    elevation_response = requests.request("GET", url)
+    elevation_json = elevation_response.json()
+    
+    elevation_dict = {
+        "altitude": elevation_json["astronomy"]["sun_altitude"],
+        "azimuth": elevation_json["astronomy"]["sun_azimuth"]
+    }
+    return elevation_dict
+    
+print(elevation(30.6187, -96.3364))
