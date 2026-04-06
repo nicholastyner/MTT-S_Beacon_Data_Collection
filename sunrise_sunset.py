@@ -36,5 +36,3 @@ def elevation(lat, lon):
         "azimuth": elevation_json["astronomy"]["sun_azimuth"]
     }
     return elevation_dict
-    
-print(elevation(30.6187, -96.3364))

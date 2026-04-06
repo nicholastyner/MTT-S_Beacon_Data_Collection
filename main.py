@@ -31,5 +31,8 @@ print(sunrise, sunset)
 # Weather
 weather_dict = weather.weather(30.6210, -96.3255)
 
+# Altitude and azimuth
+elevation_dict = sunrise_sunset.elevation(latitude_tx, longitude_tx)
+
 write_to_csv.csv_headers(weather_dict)
 write_to_csv.to_csv(weather_dict)
