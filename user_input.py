@@ -24,8 +24,9 @@ def get_input():
         print("Enter latitude of transmit station: ", end="")
         while(not valid_input):
             try:
-                latitude_tx = input()
-                valid_input = True
+                latitude_tx = float(input())
+                if(-90.0 <= latitude_tx <= 90.0):
+                    valid_input = True
             except:
                 print("Invalid input. Please enter latitude of transmit station: ", end="")
                 
@@ -34,8 +35,9 @@ def get_input():
         print("Enter longitude of transmit station: ", end="")
         while(not valid_input):
             try:
-                longitude_tx = input()
-                valid_input = True
+                longitude_tx = float(input())
+                if(-180.0 <= longitude_tx <= 180.0):
+                    valid_input = True
             except:
                 print("Invalid input. Please enter longitude of transmit station: ", end="")
         
@@ -44,8 +46,9 @@ def get_input():
         print("Enter latitude of receive station: ", end="")
         while(not valid_input):
             try:
-                latitude_rx = input()
-                valid_input = True
+                latitude_rx = float(input())
+                if(-90.0 <= latitude_rx <= 90.0):
+                    valid_input = True
             except:
                 print("Invalid input. Please enter latitude of receive station: ", end="")
                 
@@ -54,8 +57,9 @@ def get_input():
         print("Enter longitude of receive station: ", end="")
         while(not valid_input):
             try:
-                longitude_rx = input()
-                valid_input = True
+                longitude_rx = float(input())
+                if(-180.0 <= longitude_rx <= 180.0):
+                    valid_input = True
             except:
                 print("Invalid input. Please enter longitude of receive station: ", end="")
     else:
@@ -66,7 +70,7 @@ def get_input():
                 latitude_tx, longitude_tx = grid_square.calculate_grid_square(tx_grid_square)
                 valid_input = True
             except:
-                input("Invalid input. Please input a 2, 4, or 6 grid square: ")
+                tx_grid_square = input("Invalid input. Please input a 2, 4, or 6 grid square: ")
         
         
         rx_grid_square = input("Input the receive grid square: ")

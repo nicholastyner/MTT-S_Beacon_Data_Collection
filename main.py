@@ -20,24 +20,37 @@ distance_between_midpoints = distance / (COUNT_MIDPOINTS - 1)
 
 # midpoints
 midpoints = midpoints.calculate_midpoints(latitude_tx, longitude_tx, latitude_rx, longitude_rx, distance, COUNT_MIDPOINTS)
-print(midpoints)
 
+data_dict = {
+    0 : {},
+    1 : {},
+    2 : {},
+    3 : {},
+    4 : {}
+}
 
+for i in range(COUNT_MIDPOINTS):
+    
+    values = data_dict[i]
+    
+    # add locations
+    values.update({"latitude" : midpoints[i][0],
+                   "longitude" : midpoints[i][1]})
+    
+    # sunrise sunset API
+    sunrise, sunset = sunrise_sunset.sunrise_sunset(latitude_tx, longitude_tx)
+    
+    # Altitude and azimuth
+    elevation_dict = sunrise_sunset.elevation(latitude_tx, longitude_tx)
+    
+    # Weather
+    weather_dict = weather.weather(latitude_tx, longitude_rx)
 
-# sunrise sunset API
-sunrise, sunset = sunrise_sunset.sunrise_sunset(latitude_tx, longitude_tx)
+    values.update({"sunrise" : sunrise,
+                   "sunset" : sunset,})
+    values.update(elevation_dict)
+    values.update(weather_dict)
+    values.update({"time" :  datetime.now()})
 
-print(sunrise, sunset)
-
-# Weather
-weather_dict = weather.weather(latitude_tx, longitude_rx)
-
-# Altitude and azimuth
-elevation_dict = sunrise_sunset.elevation(latitude_tx, longitude_tx)
-
-write_to_csv.csv_headers(weather_dict)
-write_to_csv.to_csv(weather_dict)
-
-datetime.now()
-
-time.sleep(60)
+write_to_csv.csv_headers(data_dict)
+write_to_csv.to_csv(data_dict)
