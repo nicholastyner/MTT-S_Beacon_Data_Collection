@@ -1,8 +1,8 @@
 def csv_headers(weather_dict):
     with open("output.csv", "w") as file:
-        for point in weather_dict.values():
-            for key in weather_dict[point].keys():
-                file.write(f"Point {point}: {key},")
+        for midpoint in weather_dict.keys():
+            for key in weather_dict[midpoint].keys():
+                file.write(f"Point {midpoint}: {key},")
         file.write("\n")
     
 def to_csv(weather_dict):

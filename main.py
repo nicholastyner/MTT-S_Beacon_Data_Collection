@@ -11,7 +11,13 @@ from datetime import datetime
 COUNT_MIDPOINTS = 5
 
 # Get latitude and longitude of tx and rx
-latitude_tx, longitude_tx, latitude_rx, longitude_rx = user_input.get_input()
+# latitude_tx, longitude_tx, latitude_rx, longitude_rx = user_input.get_input()
+# FIXME
+latitude_tx = 30.0923
+longitude_tx = 32.0923
+latitude_rx = 34.0923
+longitude_rx = 36.0923
+
 
 # calculating the distance between the points Haversine formula
 distance = haversine_formula.calculate_distance(latitude_tx, longitude_tx, latitude_rx, longitude_rx)
