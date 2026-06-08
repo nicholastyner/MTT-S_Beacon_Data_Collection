@@ -2,6 +2,7 @@ import requests
 import json
 import os
 from dotenv import load_dotenv
+from datetime import datetime
 
 load_dotenv()
 
@@ -21,8 +22,8 @@ def sunrise_sunset(lat, lon):
     sunrise_sunset_dict = sunrise_sunset_json["results"]
     
     # extract useful information
-    sunrise = sunrise_sunset_dict["sunrise"]
-    sunset = sunrise_sunset_dict["sunset"]
+    sunrise = datetime.strptime(sunrise_sunset_dict["sunrise"], "%I:%M:%S %p").strftime("%H:%M:%S")
+    sunset = datetime.strptime(sunrise_sunset_dict["sunset"], "%I:%M:%S %p").strftime("%H:%M:%S")
     
     return sunrise, sunset
 
@@ -32,7 +33,7 @@ def elevation(lat, lon):
     elevation_json = elevation_response.json()
     
     elevation_dict = {
-        "altitude": elevation_json["astronomy"]["sun_altitude"],
-        "azimuth": elevation_json["astronomy"]["sun_azimuth"]
+        "altitude (deg)": elevation_json["astronomy"]["sun_altitude"],
+        "azimuth (deg)": elevation_json["astronomy"]["sun_azimuth"]
     }
     return elevation_dict

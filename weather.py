@@ -11,11 +11,11 @@ def weather(lat, lon):
     weather_response = requests.get(url = f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&units=metric&appid={OPEN_WEATHER_API_KEY}")
     weather_json = weather_response.json()
     weather_dict = {
-        "temperature": weather_json["main"]["temp"],
-        "pressure" : weather_json["main"]["pressure"],
-        "wind" : weather_json["wind"]["speed"],
-        "rain" : 0,
-        "humidity" : weather_json["main"]["humidity"]        
+        "temperature (deg C)": weather_json["main"]["temp"],
+        "pressure (mb)" : weather_json["main"]["pressure"],
+        "wind (m/s)" : weather_json["wind"]["speed"],
+        "rain (mm/h)" : 0,
+        "humidity (percentage)" : weather_json["main"]["humidity"]        
     }
     try:
         weather_dict["rain"] = weather_json["rain"]["1h"]

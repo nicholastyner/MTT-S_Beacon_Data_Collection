@@ -18,6 +18,9 @@ longitude_tx = 32.0923
 latitude_rx = 34.0923
 longitude_rx = 36.0923
 
+# FIXME
+# signal strength
+rf_strength = -54.3
 
 # calculating the distance between the points Haversine formula
 distance = haversine_formula.calculate_distance(latitude_tx, longitude_tx, latitude_rx, longitude_rx)
@@ -28,6 +31,7 @@ distance_between_midpoints = distance / (COUNT_MIDPOINTS - 1)
 midpoints = midpoints.calculate_midpoints(latitude_tx, longitude_tx, latitude_rx, longitude_rx, distance, COUNT_MIDPOINTS)
 
 data_dict = {
+    "general" : {},
     0 : {},
     1 : {},
     2 : {},
@@ -35,13 +39,16 @@ data_dict = {
     4 : {}
 }
 
+data_dict["general"].update({"RF strength (dB)" : rf_strength,
+                            "Time (HH:MM:SS)" :  datetime.now().strftime("%H:%M:%S")})
+
 for i in range(COUNT_MIDPOINTS):
     
     values = data_dict[i]
     
     # add locations
-    values.update({"latitude" : midpoints[i][0],
-                   "longitude" : midpoints[i][1]})
+    values.update({"latitude (deg)" : midpoints[i][0],
+                   "longitude (deg)" : midpoints[i][1]})
     
     # sunrise sunset API
     sunrise, sunset = sunrise_sunset.sunrise_sunset(latitude_tx, longitude_tx)
@@ -52,11 +59,10 @@ for i in range(COUNT_MIDPOINTS):
     # Weather
     weather_dict = weather.weather(latitude_tx, longitude_rx)
 
-    values.update({"sunrise" : sunrise,
-                   "sunset" : sunset,})
+    values.update({"sunrise (HH:MM:SS)" : sunrise,
+                   "sunset (HH:MM:SS)" : sunset,})
     values.update(elevation_dict)
     values.update(weather_dict)
-    values.update({"time" :  datetime.now()})
 
 write_to_csv.csv_headers(data_dict)
 write_to_csv.to_csv(data_dict)
