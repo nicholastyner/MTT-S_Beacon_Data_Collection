@@ -12,17 +12,12 @@ import requests
 COUNT_MIDPOINTS = 5
 
 # Get latitude and longitude of tx and rx
-latitude_tx, longitude_tx, latitude_rx, longitude_rx = user_input.get_input()
-
-# hardcode
-# latitude_tx = 30.0923
-# longitude_tx = 32.0923
-# latitude_rx = 34.0923
-# longitude_rx = 36.0923
-
+# latitude_tx, longitude_tx, latitude_rx, longitude_rx = user_input.get_input()
 # FIXME
-# signal strength
-rf_strength = -54.3
+latitude_tx = 30.0923
+longitude_tx = 32.0923
+latitude_rx = 34.0923
+longitude_rx = 36.0923
 
 # calculating the distance between the points Haversine formula
 distance = haversine_formula.calculate_distance(latitude_tx, longitude_tx, latitude_rx, longitude_rx)
@@ -45,8 +40,7 @@ data_dict = {
     4 : {}
 }
 
-data_dict["general"].update({"RF strength (dB)" : rf_strength,
-                            "Time (HH:MM:SS)" :  datetime.now().strftime("%H:%M:%S")})
+data_dict["general"].update({"Time (HH:MM:SS)" :  datetime.now().strftime("%H:%M:%S")})
 
 for i in range(COUNT_MIDPOINTS):
     
@@ -91,5 +85,6 @@ for i in range(COUNT_MIDPOINTS):
     values.update(elevation_dict)
     values.update(weather_dict)
 
-write_to_csv.csv_headers(data_dict)
-write_to_csv.to_csv(data_dict)
+
+# FIXME add ML function call here with data_dict
+# propagation = machine_learning_call(data_dict)
